@@ -41,7 +41,7 @@ jobs:
         password: ${{ secrets.ACTION_TOKEN }}
 
     - name: Push Docker image to ghcr.io
-      run: docker push ghcr.io/stsaction/testnodeapp
+      run: docker push ghcr.io/stsaction/sampleapp:latest
 
           
 
