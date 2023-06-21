@@ -31,7 +31,7 @@ jobs:
 
    
     - name: Build Docker image
-      run: docker build -t ghcr.io/stsaction/testnodeapp .
+      run: docker build -t ghcr.io/stsaction/sampleapp .
 
     - name: Log in to ghcr.io
       uses: docker/login-action@v1
