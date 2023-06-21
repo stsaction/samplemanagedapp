@@ -23,5 +23,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm test
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build and test
+      run: |
+          sudo docker build -t testapp .
+          sudo docker run -itd --name=sample -p "8003:3000" testapp
