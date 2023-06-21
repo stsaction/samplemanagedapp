@@ -29,7 +29,7 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Build and test
+    - name: Build and run docker image
       run: |
           sudo docker build -t testapp .
           sudo docker run -itd --name=sample -p "8003:3000" testapp
