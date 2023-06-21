@@ -1,0 +1,2 @@
+# samplemanagedapp
+Testservice
