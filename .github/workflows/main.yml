@@ -28,7 +28,28 @@ jobs:
 
     - name: Run tests
       run: npm test
+      
+    - name: Send Slack notification on test failure
+      if: ${{ failure() }}
+      env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "Tests failed for branch: ${{ github.ref }} in repository: ${{ github.repository }}",
+            "username": "GitHub Actions",
+            "icon_emoji": ":x:"
+          }' $SLACK_WEBHOOK_URL
 
+    - name: Send Slack notification on test success
+      if: ${{ success() }}
+      env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "Tests succeeded for branch: ${{ github.ref }} in repository: ${{ github.repository }}",
+            "username": "GitHub Actions",
+            "icon_emoji": ":white_check_mark:"
+          }' $SLACK_WEBHOOK_URL
    
     - name: Build Docker image
       run: docker build -t ghcr.io/stsaction/sampleapp .
