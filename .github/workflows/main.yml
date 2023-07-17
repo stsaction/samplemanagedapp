@@ -59,7 +59,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.ACTION_TOKEN1 }}
+        password: ${{ secrets.GHCRIO }}
 
     - name: Push Docker image to ghcr.io
       run: docker push ghcr.io/stsaction/sampleapp:latest
